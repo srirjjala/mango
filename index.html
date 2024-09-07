@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pure Mango Farms - Shop</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f4f6;
+            color: #333;
+        }
+
+        h1, h2, h3 {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Navigation Bar */
+        .navigation {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+            backdrop-filter: blur(10px); /* Blur effect */
+            padding: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            transition: background-color 0.3s ease;
+        }
+
+        .navigation ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navigation ul li {
+            margin: 0 20px;
+        }
+
+        .navigation ul li a {
+            color: #2c3e50;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .navigation ul li a:hover {
+            color: #e74c3c; /* Red on hover */
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 150px 20px; /* Increased padding to account for fixed nav */
+            text-align: center;
+            background: linear-gradient(135deg, #8e44ad, #3498db); /* Gradient background */
+            color: white;
+            height: 100vh;
+            box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2); /* Dark overlay */
+        }
+
+        .hero h2 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.6em;
+            margin-bottom: 40px;
+        }
+
+        .cta-button {
+            padding: 15px 40px;
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 30px;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #c0392b;
+            transform: translateY(-3px); /* Button lift effect */
+        }
+
+        /* About Us Section */
+        .about-us {
+            padding: 80px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #f39c12, #e74c3c); /* Gradient background */
+            color: white;
+        }
+
+        .about-us h2 {
+            font-size: 2.8em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .about-us p {
+            font-size: 1.3em;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+            background: rgba(0, 0, 0, 0.5); /* Dark semi-transparent background for text */
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        /* Shop Section */
+        .shop-section {
+            padding: 80px 20px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shop-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('shop-bg.jpg') no-repeat center center; /* Background image */
+            background-size: cover;
+            filter: blur(8px); /* Blurry background effect */
+            z-index: 1;
+            opacity: 0.3; /* Slightly visible background */
+        }
+
+        .shop-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            color: #e74c3c;
+            position: relative;
+            z-index: 2;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .product-card {
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .product-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.1), transparent);
+            transition: opacity 0.3s ease;
+            opacity: 0;
+            z-index: 1;
+        }
+
+        .product-card:hover::before {
+            opacity: 1;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: auto;
+            border-bottom: 2px solid #eee;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover img {
+            transform: scale(1.05); /* Zoom effect */
+        }
+
+        .product-card h3 {
+            font-size: 1.8em;
+            margin: 15px 0;
+            color: #34495e;
+            z-index: 2;
+        }
+
+        /* Footer Section */
+        footer {
+            padding: 20px;
+            text-align: center;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+        }
+
+        .footer-contact {
+            margin: 10px 0;
+        }
+
+        .phone-icon {
+            width: 20px;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+        .whatsapp-icon {
+            width: 20px;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+        .whatsapp-link {
+            color: #25d366;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+        }
+
+        .whatsapp-link:hover {
+            color: #128c7e;
+        }
+
+        /* Smooth Scroll Behavior */
+        html {
+            scroll-behavior: smooth; /* Smooth scrolling when navigating */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <header class="navigation">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#shop">Shop</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h2>Welcome to Pure Mango Farms</h2>
+        <p>We deliver the finest, juiciest, and hand-picked fresh mangoes straight from our farms to your door.</p>
+        <a href="#shop" class="cta-button">Shop Now</a>
+    </section>
+
+    <!-- About Us Section -->
+    <section class="about-us" id="about">
+        <h2>About Us</h2>
+        <p>At Pure Mango Farms, we are passionate about bringing you the best mangoes grown with love and care. Our farm is rooted in sustainable practices, ensuring our mangoes are not only delicious but also environmentally friendly. We use organic methods to cultivate our mangoes, free from harmful chemicals and pesticides. Our commitment to quality means that every mango you enjoy is a testament to our dedication to excellence. We pride ourselves on delivering fresh, juicy mangoes that support local agriculture and promote a healthier planet.</p>
+    </section>
+
+    <!-- Shop Section -->
+    <section class="shop-section" id="shop">
+        <h2>Our Mango Varieties</h2>
+        <div class="product-grid">
+            <!-- Banginpalli Mango -->
+            <div class="product-card">
+                <img src="Benisha.jpg" alt="Benisha Mango">
+                <h3>Benisha Mango</h3>
+            </div>
+
+            <!-- Himayat Mango -->
+            <div class="product-card">
+                <img src="himayat.jpg" alt="Himayat Mango">
+                <h3>Himayat Mango</h3>
+            </div>
+
+            <!-- Dasari Mango -->
+            <div class="product-card">
+                <img src="Dasheri.jpg" alt="Dasheri Mango">
+                <h3>Dasheri Mango</h3>
+            </div>
+
+            <!-- Kaseri Mango -->
+            <div class="product-card">
+                <img src="kesari.jpg" alt="Kasari Mango">
+                <h3>Kasari Mango</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-contact">
+            <p>
+                <img src="phone-icon.png" alt="Phone" class="phone-icon">
+                Call us: +91 6305344547
+            </p>
+            <p>
+                <a href="https://wa.me/916305344547" class="whatsapp-link">
+                    <img src="whatsapp-icon.png" alt="WhatsApp" class="whatsapp-icon">
+                    Chat with Us
+                </a>
+            </p>
+        </div>
+        <p>© 2024 Pure Mango Farms. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
